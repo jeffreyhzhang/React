@@ -78,6 +78,49 @@ search(query)
 * Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
 * These books do not know which shelf they are on. They are raw results only. You'll need to make sure that books have the correct state while on the search page.
 
+###### Explore what is inside a book when we call api to get a list of books
+ 
+                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
+                  You can find these search terms here:
+                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+
+                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+                  you don't find a specific author or title. Every search is limited by search terms.
+
+
+                Use an Authorization header to work with your own data:
+
+                fetch('https://reactnd-books-api.udacity.com', { headers: { 'Authorization': 'whatever-you-want' }})
+
+                The following endpoints are available:
+
+                GET /status
+                GET /books
+                GET /books/:id
+                PUT /books/:id { shelf }
+                POST /search { query, maxResults }
+
+                From postman, I got a peak of what I will get back from the get api
+                
+                  "title": "The Linux Command Line",
+                  "subtitle": "A Complete Introduction",
+                  "authors": ["William E. Shotts, Jr." ],
+                  "publisher": "No Starch Press",
+                  "publishedDate": "2012",
+                  "pageCount": 480,
+                  "printType": "BOOK",
+                  "description":"A brilliant debut mystery in a classic vein: Detective Cormoran Strike investigates a supermodel's suicide. After losing his leg to a land mine in 
+                                 Afghanistan,Cormoran Strike is  barely scraping by as a private investigator.",
+                  "categories": [ "COMPUTERS" ],
+                  "imageLinks": {
+                                  "smallThumbnail": "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                                  "thumbnail": "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                    },
+                  "id": "nggnmAEACAAJ",
+                  "shelf": "currentlyReading"
+
+ ########
+
 ## Important
 The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
 
