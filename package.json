@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "escape-string-regexp": "^2.0.0",
+    "loadsh": "0.0.4",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import { dropRight } from 'lodash';
 import BookShelf from './BookShelf'
 import * as BooksAPI from './BooksAPI'
 import { Route, Switch } from 'react-router-dom'
@@ -57,7 +58,7 @@ class BooksApp extends React.Component {
  } 
 
   render() {
-    const bookshelves =  window.$bookShelfList 
+    const bookshelves = dropRight(window.$bookShelfList );
     const allbooks = this.state.books;
 
     return (
@@ -77,11 +78,11 @@ class BooksApp extends React.Component {
                   </div>
                   <div className="list-books-content">
                     <div>
-                    { bookshelves.map( (bs) =>(
+                    { bookshelves.map( (bookshelf) =>(
                             <BookShelf
-                                key={bs.id}
-                                shelfname={bs.name}
-                                booksOnShelf={allbooks.filter(book =>book.shelf === bs.id)}
+                                key={bookshelf.id}
+                                shelfname = {bookshelf.name}
+                                booksOnShelf={allbooks.filter(book =>book.shelf === bookshelf.id )}
                                 onShelfChange={this.onShelfChange}
                             >
                             </BookShelf>

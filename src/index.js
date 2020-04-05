@@ -9,8 +9,8 @@ import { BrowserRouter } from 'react-router-dom'
 window.$bookShelfList = [
     {id:'currentlyReading', name:'Currently Reading'},
     {id:'wantToRead', name:'Want to Read'},
-    {id:'read', name:'Read'} 
-   // {id:'none', name:'None'}
+    {id:'read', name:'Read'},
+    {id:'none', name:'None'} //bu we do not want this to show on hmoe page
    ]
  
 ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'))
