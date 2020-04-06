@@ -15,7 +15,6 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
- 
         this.setState({books: books });
     }).catch((reason) => {
       if(reason === -999) {
@@ -28,25 +27,22 @@ class BooksApp extends React.Component {
   }
   
   onShelfChange = (book, bookshelf) =>  {
-    //update via API and refresh the UI via setState()
-    let books = this.state.books;
-    //let bookshelves = this.state.bookshelves;
     book.shelf = bookshelf;
-  
     BooksAPI.update(book, bookshelf).then(
       bs=> {
+        //update via API and refresh the UI via setState()
+        let books = [...this.state.books];
         //if book is added (not just moved from different shelf on main page), we need add the book to collection
-        // but if the book is already on "Read"shelf...but from search I Move to "WantRead"...
-        // We only change the book's shelf..so the books (all the rest like id, title ect ) did not change... it did not refresh the page 
-        // we need force GUI to refresh!  
-        if (books.find(x=>x.id===book.id)){ 
-          // books[book.id] = book;
-          // books[book.id].shelf=bookshelf;
+        // but if the book is already on "Read"shelf and then from search,  I Move to "WantRead"...
+        // We only change the book's shelf...so the book (all the rest like id, title ect ) did not change... it did not refresh the page 
+        // This is due to the fact you are changing the books in tate directly via  let books = this.state.books instead of spread  to create new array!
+        const idx = books.findIndex(x=>x.id===book.id);
+        if (idx>=0){ 
+          books[idx] = book;
           // setState does not working properly when you go back to main page... shallow comparison??
-          // let's try to remove it firs and add back to trigger 
-          const idx = books.findIndex(x=>x.id===book.id);
-          books.splice(idx,1);
-          books.push(book);
+          // let's try to remove it firs and add back to trigger refresh
+          //books.splice(idx,1);
+         // books.push(book);
         }
         else{ 
           books.push(book);
@@ -67,7 +63,7 @@ class BooksApp extends React.Component {
           <Route exact path='/search' render={({ history }) => (
             <SearchBooks  
               onShelfChange={this.onShelfChange}  
-              booksOnShelf = {allbooks}
+              booksOnShelf = {this.state.books}
             >
             </SearchBooks> 
           )}/>  
@@ -82,7 +78,7 @@ class BooksApp extends React.Component {
                             <BookShelf
                                 key={bookshelf.id}
                                 shelfname = {bookshelf.name}
-                                booksOnShelf={allbooks.filter(book =>book.shelf === bookshelf.id )}
+                                booksOnShelf={this.state.books.filter(book =>book.shelf === bookshelf.id )}
                                 onShelfChange={this.onShelfChange}
                             >
                             </BookShelf>

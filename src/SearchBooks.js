@@ -97,7 +97,7 @@ class SearchBooks extends Component {
                        //console.log(bk.authors.join(" and "))
                      )
                    ):
-                   query.trim().length>0  && matchingbooks.length>0 && <li><h2 style={{color:"orange"}}>No Books Found!</h2></li>
+                   query.trim().length>0 && <li><h2 style={{color:"orange"}}>No Books Found!</h2></li>
                   }
               </ol>
             </div>
